@@ -10,7 +10,7 @@ const App = () => {
 				<AppHeader/>
 					<main>
 						<Routes>
-							<Route path="/" element={<MainPage/>}/>
+							<Route path="olga-ryzhova.github.io" element={<MainPage/>}/>
 							<Route path="/comics" element={<ComicsPage/>}/>
 							<Route path="/comics/:comicId" element={<SingleComicPage/>}/>
 							<Route path="*" element={<Page404/>}/>
