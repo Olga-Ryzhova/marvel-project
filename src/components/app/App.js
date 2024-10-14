@@ -10,7 +10,7 @@ const App = () => {
 				<AppHeader/>
 					<main>
 						<Routes>
-							<Route path="Olga-Ryzhova/marvel-project" element={<MainPage/>}/>
+							<Route path="/" element={<MainPage/>}/>
 							<Route path="/comics" element={<ComicsPage/>}/>
 							<Route path="/comics/:comicId" element={<SingleComicPage/>}/>
 							<Route path="*" element={<Page404/>}/>
