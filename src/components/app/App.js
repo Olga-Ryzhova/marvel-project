@@ -4,7 +4,7 @@ import AppHeader from "../appHeader/AppHeader";
 
 const App = () => {
 	return (
-		<Router>
+		<Router basename="/marvel-project">
 			<div className="app">
 
 				<AppHeader/>
