@@ -60,6 +60,7 @@ const useMarvelService = () => {
 				? `${comics.pageCount} p.`
 				: "No information about the number of pages",
 			thumbnail: comics.thumbnail.path + '.' + comics.thumbnail.extension,
+			language: comics.textObjects[0]?.language || "en-us",
 			price: comics.prices[0].price
 				? `${comics.prices[0].price}$`
 				: "not available",
