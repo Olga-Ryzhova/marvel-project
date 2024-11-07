@@ -2,8 +2,7 @@ import { useState, useCallback } from "react";
 
 // хук, который будет работать с запросами
 export const useHttp = () => {
-  const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(null);
+  const [process, setProcess] = useState('waiting'); //ожидание
 
   // функция, которая делает запросы
   const request = useCallback(async (
@@ -15,8 +14,8 @@ export const useHttp = () => {
     },
   ) => {
     
-    // перед отправкой запроса показываем спиннер
-    setLoading(true);
+    // обозначаем процесс загрузки
+    setProcess('loading')
 
     // обработка асинхронного запроса
     try {
@@ -29,23 +28,21 @@ export const useHttp = () => {
     // получаем данные в формате JSON:
       const data = await response.json();
 
-    // после успешной загрузки скрываем спиннер
-    setLoading(false);
-
     // возвращаем данные
       return data;
     } catch (e) {
-    // в любом случае скрываем спиннер
-      setLoading(false);
-    // в состояние error добавляем сообщение об ошибке
-      setError(e.message);
+    // процесс возникновения ошибки
+    setProcess('error')
     // выкидывем ошибку
       throw e;
     }
   }, []);
 
   // очищаем ошибку
-  const clearError = useCallback(() => setError(null), []);
+  const clearError = useCallback(() => {
+    // обозначаем процесс загрузки
+    setProcess('loading')
+  }, []);
 
-  return {loading, request, error, clearError};
+  return {request, clearError, process, setProcess};
 };

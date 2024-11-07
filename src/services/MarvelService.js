@@ -2,7 +2,7 @@ import { useHttp } from "../hooks/http.hook";
 
 const useMarvelService = () => {
 	// импортируем все переменные, которые есть в хуке useHttp
-	const {loading, request, error, clearError } = useHttp();
+	const {request, clearError, process, setProcess } = useHttp();
 	
 	// начальное название API
 	const _apiBase = 'https://gateway.marvel.com:443/v1/public/';
@@ -76,7 +76,15 @@ const useMarvelService = () => {
 	}
 
 	// возвращаем объект из функции
-	return {loading, error, clearError, getAllCharacters, getCharacterByName, getCharacter, getAllComics, getComic};
+	return { 
+		clearError, 
+		process,
+		setProcess,
+		getAllCharacters, 
+		getCharacterByName, 
+		getCharacter, 
+		getAllComics, 
+		getComic};
 }
 
 export default useMarvelService;

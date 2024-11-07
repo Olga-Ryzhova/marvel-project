@@ -11,7 +11,7 @@ import './charSearchForm.scss';
 const CharSearchForm = () => {
   const [char, setChar] = useState(null);
 	
-	const {loading, error, getCharacterByName, clearError} = useMarvelService();
+	const {getCharacterByName, clearError, process, setProcess} = useMarvelService();
 
 	// запрос на сервер
 	const updateChar = (name) => {
@@ -20,6 +20,7 @@ const CharSearchForm = () => {
 
 		getCharacterByName(name)
 			.then(onCharLoaded)
+			.then(() => setProcess('confirmed'))
 	}
 
 	// устаналивает состояние
@@ -28,7 +29,7 @@ const CharSearchForm = () => {
 	}
 
 	// если ошибка при запросе на сервер
-	const errorMessage = error ? <div className="char__search-critical-error"><ErrorMessage /></div> : null;
+	const errorMessage = process === 'error' ? <div className="char__search-critical-error"><ErrorMessage /></div> : null;
 
 	// запись результат
 	const results = !char ? null : char.length > 0 ?
@@ -65,7 +66,7 @@ const CharSearchForm = () => {
 						<button 
 							type='submit' 
 							className="button button__main"
-							disabled={loading}>
+							disabled={process === 'loading'}>
 							<div className="inner">find</div>
 						</button>
 					</div>
