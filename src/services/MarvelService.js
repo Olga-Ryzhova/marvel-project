@@ -5,14 +5,14 @@ const useMarvelService = () => {
 	const {request, clearError, process, setProcess } = useHttp();
 	
 	// начальное название API
-	const _apiBase = 'https://gateway.marvel.com:443/v1/public/';
+	const _apiBase = 'https://marvel-server-zeta.vercel.app/';
 	// мой ключ
-	const _apiKey = 'apikey=129b3670ad033d82bbeb6ea2a1095d5c';
+	const _apiKey = 'apikey=d4eecb0c66dedbfae4eab45d312fc1df';
 	//базовый отступ  у персонажей
-	const _baseOffset = 650;
+	const _baseOffset = 0;
 
 	//базовый отступ у комиксов
-	const _baseOffsetComics = 340;
+	const _baseOffsetComics = 0;
 
 	// получение всех персонажей
 	const getAllCharacters = async (offset = _baseOffset) => {
@@ -53,7 +53,7 @@ const useMarvelService = () => {
 						thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
 						homepage: char.urls[0].url,
 						wiki: char.urls[1].url,
-						comics: char.comics.items,
+						comics: char.comics.items.map(item => typeof item === 'string' ? {name: item} : item),
 		}
   }
 
@@ -67,11 +67,11 @@ const useMarvelService = () => {
 				? `${comics.pageCount} p.`
 				: "No information about the number of pages",
 			thumbnail: comics.thumbnail.path + '.' + comics.thumbnail.extension,
-			language: comics.textObjects[0]?.language || "en-us",
+			language: comics.textObjects?.[0]?.language || comics.textObjects?.languages || "en-us",
 			price: comics.prices[0].price
 				? `${comics.prices[0].price}$`
 				: "not available",
-			homepage: comics.urls[0].url,
+			homepage: comics.urls?.[0]?.url,
 		}
 	}
 

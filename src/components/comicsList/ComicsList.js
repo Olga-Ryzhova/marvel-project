@@ -29,7 +29,7 @@ const setContent = (process, Component, newItemLoading) => {
 const ComicsList = (props) => {
 	const [comicsList, setComicsList] = useState([]);
 	const [newItemLoading, setnewItemLoading] = useState(false);
-	const [offset, setOffset] = useState(340);
+	const [offset, setOffset] = useState(0);
 	const [comicsEnded , setComicsEnded] = useState(false);
 
 	// вызываем функцию
